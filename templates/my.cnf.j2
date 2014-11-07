@@ -1,0 +1,17 @@
+# {{ ansible_managed }}
+[mysqld]
+datadir={{ mysql_datadir }}
+socket={{ mysql_socket }}
+user={{ mysql_user }}
+# Disabling symbolic-links is recommended to prevent assorted security risks
+symbolic-links={{ mysql_symbolic_links }}
+
+{% if mysql_innodb_enabled %}
+# innodb
+innodb_buffer_pool_size={{ mysql_innodb_buffer_pool_size }}
+innodb_file_per_table={{ mysql_innodb_file_per_table }}
+{% endif %}
+
+[mysqld_safe]
+log-error={{ mysql_log_error }}
+pid-file={{ mysql_pid_file }}

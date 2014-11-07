@@ -1,2 +1,81 @@
 ---
 # tasks file for mysql
+
+- name: Install MySQL server packages
+  yum: name={{ item }} state=present
+  with_items:
+    - mysql
+    - mysql-server
+    - MySQL-python
+  tags: mysql
+
+- name: Create MySQL server configuration
+  template: >
+    src=my.cnf.j2
+    dest=/etc/my.cnf
+    owner=root
+    group=root
+    mode=0644
+  notify: restart MySQL
+  tags: mysql
+
+- name: Ensure mysql group is created
+  group: name=mysql gid=27 system=yes state=present
+  tags: mysql
+
+- name: Ensure mysql user is created
+  user: >
+    name=mysql
+    comment="MySQL Server"
+    createhome=no
+    group=mysql
+    home=/var/lib/mysql
+    shell=/bin/bash
+    state=present
+    system=yes
+    uid=27
+
+- name: Ensure MySQL is running and enabled on boot
+  service: name=mysqld state=started enabled=yes
+  tags: mysql
+
+- name: Set the root password
+  mysql_user: name=root host={{ item }} password={{ mysql_root_password }}
+  with_items:
+    - "{{ ansible_hostname }}"
+    - 127.0.0.1
+    - ::1
+    - localhost
+  when: ansible_hostname != "localhost"
+  tags: mysql
+
+- name: Set the root password
+  mysql_user: name=root host={{ item }} password={{ mysql_root_password }}
+  with_items:
+    - 127.0.0.1
+    - ::1
+    - localhost
+  when: ansible_hostname == "localhost"
+  tags: mysql
+
+- name: Create root user MySQL client configuration
+  template: >
+    src=root_dot_my.cnf.j2
+    dest=/root/.my.cnf
+    owner=root
+    group=root
+    mode=0600
+  tags: mysql
+
+- name: Remove MySQL anonymous user
+  mysql_user: name="" host={{ item }} state=absent
+  with_items:
+    - "{{ ansible_hostname }}"
+    - 127.0.0.1
+    - ::1
+    - localhost
+  tags: mysql
+
+- name: Remove MySQL test database
+  mysql_db: name=test state=absent
+  tags: mysql
