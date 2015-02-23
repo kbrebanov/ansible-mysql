@@ -33,7 +33,9 @@ max_binlog_size = {{ mysql_max_binlog_size }}
 {% if mysql_innodb_enabled %}
 # innodb
 innodb_buffer_pool_size = {{ mysql_innodb_buffer_pool_size }}
-innodb_file_per_table = {{ mysql_innodb_file_per_table }}
+{% if mysql_innodb_file_per_table %}
+innodb_file_per_table
+{% endif %}
 {% endif %}
 
 [mysqld_safe]
