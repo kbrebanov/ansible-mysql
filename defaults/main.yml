@@ -23,6 +23,8 @@ mysql_expire_logs_days: 10
 mysql_max_binlog_size: 100M
 mysql_pid_file: /var/run/mysqld/mysqld.pid
 mysql_nice: 0
+mysql_character_set_server: utf8
+mysql_collation_server: utf8_bin
 
 mysql_innodb_enabled: True
 mysql_innodb_buffer_pool_size: 8M

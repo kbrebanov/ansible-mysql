@@ -29,6 +29,8 @@ query_cache_size = {{ mysql_query_cache_size }}
 log-error = {{ mysql_log_error }}
 expire_logs_days = {{ mysql_expire_logs_days }}
 max_binlog_size = {{ mysql_max_binlog_size }}
+character-set-server = {{ mysql_character_set_server }}
+collation-server = {{ mysql_collation_server }}
 
 {% if mysql_innodb_enabled %}
 # innodb
