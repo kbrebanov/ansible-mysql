@@ -11,7 +11,7 @@ This role requires Ansible 1.6 or higher.
 Role Variables
 --------------
 
-| Namem                                       | Default   | Description                                                                                                                                                                              |
+| Name                                        | Default   | Description                                                                                                                                                                              |
 |---------------------------------------------|-----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | mysql_version                               | 5.6       | Version of MySQL to install                                                                                                                                                              |
 | mysql_root_password                         | password  | MySQL root password                                                                                                                                                                      |
