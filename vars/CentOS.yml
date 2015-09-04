@@ -1,7 +1,2 @@
 ---
 # vars file for mysql (CentOS specific)
-
-mysql_config_path: /etc/my.cnf
-mysql_daemon_name: mysqld
-mysql_socket: /var/lib/mysql/mysql.sock
-mysql_log_error: /var/log/mysqld.log
