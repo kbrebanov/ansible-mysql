@@ -1,6 +1,8 @@
 mysql
 =====
 
+[![Ansible Galaxy](https://img.shields.io/badge/galaxy-kbrebanov.mysql-660198.svg)](https://galaxy.ansible.com/list#/roles/4995)
+
 Installs and configures MySQL
 
 Requirements
